@@ -12,9 +12,9 @@ public class Population {
 		if (initialise) {
 			// Loop and create individuals
 			for (int i = 0; i < populationSize(); i++) {
-				Tour newTour = new Tour();
-				newTour.generateIndividual();
-				saveTour(i, newTour);
+				// Tour newTour = new Tour();
+				// newTour.generateIndividual();
+				// saveTour(i, newTour);
 			}
 		}
 	}

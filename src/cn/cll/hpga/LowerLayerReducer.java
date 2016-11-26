@@ -6,23 +6,18 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class LowerLayerReducer extends Reducer<Text, LongWritable, Text, LongWritable> {
+public class LowerLayerReducer extends Reducer<LongWritable, Text, Text, LongWritable> {
 
-	// key: hello , values : {1,1,1,1,1.....}
 	@Override
-	protected void reduce(Text key, Iterable<LongWritable> values, Context context)
+	protected void reduce(LongWritable key, Iterable<Text> values, Context context)
 			throws IOException, InterruptedException {
 
-		// 定义一个累加计数器
-		long count = 0;
-		for (LongWritable value : values) {
+		// 数据样本 623 [55,66]#[23,45]#[24,45]#[11,78]#[34,25]
 
-			count += value.get();
-
+		// 直接写出
+		for (Text value : values) {
+			context.write(value, key);
 		}
-
-		// 输出<单词：count>键值对
-		context.write(key, new LongWritable(count));
 
 	}
 

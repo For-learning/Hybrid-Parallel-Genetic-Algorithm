@@ -1,7 +1,7 @@
 package cn.cll.hpgaUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 /**
  * 每个Tour就是种群的一个 个体
@@ -9,31 +9,13 @@ import java.util.Collections;
 public class Tour {
 
 	// 保持所有城市的路径
-	private ArrayList tour = new ArrayList<City>();
+	private List<City> tour = new ArrayList<City>();
 	// Cache
-	private double fitness = 0;
+	private Integer fitness = 0;
 	private int distance = 0;
 
-	// Constructs a blank tour
-	public Tour() {
-		// for (int i = 0; i < TSP_GA.destinationCities.size(); i++) {
-		// tour.add(null);
-		// }
-	}
-
-	public Tour(ArrayList tour) {
-		this.tour = tour;
-	}
-
-	// 创建一个随机的 个体(路径)
-	public void generateIndividual() {
-		// Loop through all our destination cities and add them to our tour
-		// for (int cityIndex = 0; cityIndex < TSP_GA.destinationCities.size();
-		// cityIndex++) {
-		// setCity(cityIndex, TSP_GA.destinationCities.get(cityIndex));
-		// }
-		// 打乱顺序
-		Collections.shuffle(tour);
+	public Tour(List<City> array) {
+		this.tour = array;
 	}
 
 	// Gets a city from the tour
@@ -41,18 +23,10 @@ public class Tour {
 		return (City) tour.get(tourPosition);
 	}
 
-	// 讲城市加入到路径中
-	public void setCity(int tourPosition, City city) {
-		tour.set(tourPosition, city);
-		// If the tours been altered we need to reset the fitness and distance
-		fitness = 0;
-		distance = 0;
-	}
-
 	// 距离小的适应值较大
-	public double getFitness() {
+	public Integer getFitness() {
 		if (fitness == 0) {
-			fitness = 1 / (double) getDistance();
+			fitness = (1 / getDistance()) * 1000000;
 		}
 		return fitness;
 	}
