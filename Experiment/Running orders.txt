@@ -1,0 +1,15 @@
+hadoop jar wc.jar cn.itheima.bigdata.hadoop.mr.wordcount.WordCountRunner
+
+
+hdfs dfs -put srcdata /wc
+
+
+hadoop fs -mkdir /hpga
+
+
+hadoop fs -put ./ucityInput /hpga/
+
+
+hadoop jar hpga.jar  cn.cll.hpga.HPGARunner
+
+hadoop fs -rmr /hpga/ucityOutput
